@@ -1,15 +1,35 @@
-// Get the button and the skills section from the DOM
-const toggleButton = document.querySelector('.toggle');
-const skillsSection = document.querySelector('#skills ul');
+const updateButton = document.getElementById("updateContact");
+const contactDisplay = document.getElementById("contactDisplay");
+const contactInput = document.getElementById("contactInput");
 
-// Add a click event listener to the button
-toggleButton.addEventListener('click', () => {
-    // Toggle the visibility of the skills section
-    if (skillsSection.style.display === 'none') {
-        skillsSection.style.display = 'block';
-        toggleButton.textContent = 'Hide Skills'; // Change button text
-    } else {
-        skillsSection.style.display = 'none';
-        toggleButton.textContent = 'Show Skills'; // Change button text
-    }
+updateButton.addEventListener("click", () => {
+  const newContact = contactInput.value;
+  if (newContact) {
+    contactDisplay.textContent = newContact;
+    contactInput.value = "";
+  }
+});
+
+const toggleSkillBtn = document.getElementById("toggle");
+const skillList = document.getElementById("skillList");
+
+toggleSkillBtn.addEventListener("click", () => {
+  if (skillList.style.display === "none") {
+    skillList.style.display = "block";
+    toggleSkillBtn.textContent = "Hide Skills";
+  } else {
+    skillList.style.display = "none";
+    toggleSkillBtn.textContent = "Show Skills";
+  }
+});
+
+const saveBtn = document.getElementById("saveResume");
+
+saveBtn.addEventListener("click", () => {
+  const resumedata = {
+    contact: contactDisplay.textContent,
+  };
+
+  localStorage.setItem("resumeData", JSON.stringify(resumedata));
+  alert("Resume Data Saved!");
 });

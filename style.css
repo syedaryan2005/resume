@@ -1,56 +1,95 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
 }
 
-.body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+body {
+  font-family: Arial, sans-serif;
+  line-height: 2;
+  background-color: #de7c7d;
+  margin: 0;
+  padding: 0;
 }
 
-.container {
-    max-width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+#resumeForm {
+  display: block;
+  padding: 10px 15px;
+  margin-left: 25%;
+  max-width: 50%;
 }
 
-h2 {
-    color: #444;
-    margin: 10px auto;
-    text-decoration: underline;
+h1 {
+  text-align: center;
+  color: #740938;
+  text-decoration: underline;
+  font-size: 2.5rem;
 }
 
-.profile-pic {
-    padding-top: 20px;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
+h3 {
+  color: #740938;
+  text-decoration: underline;
+  font-size: 1.8rem;
+
 }
 
-ul {
-    list-style-type: none;
+label {
+  font-weight: 600;
+  color: #af1740;
+  text-decoration: underline;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.75rem;
 }
 
-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
+input {
+  padding: 10px 5px;
+  border-radius: 5px;
+  width: 90%;
+  border: 2px solid #740938;
+}
+
+#photo {
+  background-color: white;
+}
+
+legend {
+  color: #740938;
+  font-size: 1.5rem;
+}
+
+.text-box {
+  border: 2px solid #740938;
+  width: 100%;
+  height: 130px;
+  border-radius: 10px;
+}
+
+#submit {
+  padding: 15px 10px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #cc2b52;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
 }
 
 button:hover {
-    background-color: #218838;
+  background-color: #af1740;
 }
 
-#skills ul {
-    display: none;
+.hidden {
+  display: none;
 }
+
+#resumePhoto {
+    border-radius: 50%;
+    margin-left: 43%;
+    margin-top: 30px;
+    height: 160px;
+    width: 160px;
+    object-fit: cover;
+    
+}
+

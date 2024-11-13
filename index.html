@@ -3,45 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interactive Resume</title>
+    <title>Dynamic Editable Resume</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <section id="personal-info">
-        <h2>Personal Information</h2>
-        <p>Name: Syed Aryan Ali Shah</p>
-        <p>Contact: 03183364162</p>
-        <p>Email: syedaryana869@gmail.com</p>
-        <img src="profile 2.jpg" alt="profile pic" class="profile-pic" />
-      </section>
+    <div id="container">
+      <h1>Resume Builder</h1>
+      <form id="resumeForm">
+        <fieldset>
+          <legend>username</legend>
+          <input type="text" id="username" placeholder="username" required />
+          <h3>Personal Information</h3>
+          <label for="photo">Upload Photo</label>
+          <input
+            type="file"
+            id="photo"
+            placeholder="choose a photo"
+            name="photos"
+            required
+          />
+          <label for="username">Name: </label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required
+          />
+          <label for="email">Email: </label>
+          <input
+            type="text"
+            placeholder="Enter your email"
+            id="email"
+            required
+          />
+          <label for="contact">Phone:</label>
+          <input
+            type="contact"
+            placeholder="Contact Number"
+            id="number"
+            required
+          />
+        </fieldset>
+        <fieldset id="education">
+          <legend>Education</legend>
+          <label for="degree">Degree:</label>
+          <input type="text" id="degree" required />
+          <label for="school">Collage/University:</label>
+          <input type="text" id="institute" required />
+        </fieldset>
+        <fieldset>
+          <legend>Work Experinace</legend>
+          <h3>Details</h3>
+          <textarea
+            name="textbox"
+            id="workText"
+            class="text-box"
+            placeholder="Write here....."
+            required
+          ></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>Skills</legend>
+          <h3>List Your Skills</h3>
+          <textarea
+            name="textbox"
+            id="experianceText"
+            class="text-box"
+            placeholder="Write here....."
+            required
+          ></textarea>
+        </fieldset>
+        <button id="submit" type="submit">Generate Form</button>
+      </form>
+    </div>
+    <div id="resumePage" class="resume-page hidden">
+      <div id="resumeContent" class="resume-content">
+        <img id="resumePhoto" class="resume-photo" src="" alt="photo" />
 
-      <section id="education">
-        <h2>Education</h2>
-        <p>Bechlor's Degree in Computer Science</p>
-        <p>XYZ Univesity</p>
-       
-      </section>
+        <h3 id="resumeName" style="text-align: center; margin-bottom: -30px;"></h3>
+        <p id="resumeEmail"></p>
+        <p id="resumePhone"></p>
 
-      <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-          <li>HTML , CSS , JavaScript</li>
-          <li>React, Typescript</li>
-          <li>Node.JS</li>
-        </ul>
+        <h3>Education</h3>
+        <p id="resumeEducation"></p>
 
-        <button class="toggle">Toggle Skills</button>
-      </section>
-
-      <section id="work-experiance">
         <h2>Work Experiance</h2>
-        <p>Software Engineer at ABC Corp</p>
-      </section>
+        <p id="resumeWorkExperiance"></p>
+
+        <h2>Skills</h2>
+        <p id="resumeSkills"></p>
+      </div>
+
+      <button id="editButton">Edit</button>
+      <button id="backButton" onclick="window.location.href = 'index.html'">
+        Back to Form
+      </button>
+      <button id="shareButton">Share Your Resume</button>
+      <button id="download-pdf">Download Resume</button>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+
   </body>
 </html>
-
-

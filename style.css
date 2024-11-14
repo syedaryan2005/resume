@@ -5,9 +5,14 @@
 body {
   font-family: Arial, sans-serif;
   line-height: 2;
-  background-color: #de7c7d;
+  background-color: #F5F5F5;
   margin: 0;
   padding: 0;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 #resumeForm {
@@ -19,32 +24,29 @@ body {
 
 h1 {
   text-align: center;
-  color: #740938;
-  text-decoration: underline;
+  color: #003366;
   font-size: 2.5rem;
 }
 
 h3 {
-  color: #740938;
-  text-decoration: underline;
+  color: #003366;
   font-size: 1.8rem;
 
 }
 
 label {
   font-weight: 600;
-  color: #af1740;
-  text-decoration: underline;
+  color: #003366;
   font-size: 1rem;
   display: block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 input {
   padding: 10px 5px;
   border-radius: 5px;
   width: 90%;
-  border: 2px solid #740938;
+  border: 2px solid #003366;
 }
 
 #photo {
@@ -52,22 +54,23 @@ input {
 }
 
 legend {
-  color: #740938;
+  color: #003366;
   font-size: 1.5rem;
 }
 
 .text-box {
-  border: 2px solid #740938;
+  border: 2px solid #003366;
   width: 100%;
   height: 130px;
   border-radius: 10px;
 }
 
-#submit {
+button {
   padding: 15px 10px;
-  margin-top: 20px;
+  margin-top: 25px;
+  font-weight: bold;
   text-align: center;
-  background-color: #cc2b52;
+  background-color: #003366;
   color: white;
   border: none;
   border-radius: 5px;
@@ -76,7 +79,14 @@ legend {
 }
 
 button:hover {
-  background-color: #af1740;
+  background-color: #003366;
+}
+
+.btn {
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: bold;
+
 }
 
 .hidden {
@@ -85,11 +95,44 @@ button:hover {
 
 #resumePhoto {
     border-radius: 50%;
-    margin-left: 43%;
     margin-top: 30px;
     height: 160px;
     width: 160px;
     object-fit: cover;
+    border: 5px solid #003366;
     
 }
 
+h2 {
+    color:  #003366;
+    font-size: 1.8rem;
+    margin-top: -10px;
+    text-align: center;
+}
+
+
+#container , #resumePage {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); 
+
+}
+
+
+ form div {
+    margin-bottom: 1.5rem;
+ }
+  
+
+ #resumePage {
+    padding-left: 25%;
+    align-items: center;
+ }
+
+ h1, h3, label, legend {
+    text-decoration: none; /* Remove underline */
+  }
+  

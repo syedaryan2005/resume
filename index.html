@@ -78,29 +78,32 @@
     </div>
     <div id="resumePage" class="resume-page hidden">
       <div id="resumeContent" class="resume-content">
-        <img id="resumePhoto" class="resume-photo" src="" alt="photo" />
 
-        <h3 id="resumeName" style="text-align: center; margin-bottom: -30px;"></h3>
+        <img id="resumePhoto" class="resume-photo" src="" alt="photo" />
+        <h2 id="resumeName"></h2>
         <p id="resumeEmail"></p>
         <p id="resumePhone"></p>
 
         <h3>Education</h3>
         <p id="resumeEducation"></p>
 
-        <h2>Work Experiance</h2>
+        <h3>Work Experiance</h3>
         <p id="resumeWorkExperiance"></p>
 
-        <h2>Skills</h2>
+        <h3>Skills</h3>
         <p id="resumeSkills"></p>
       </div>
 
-      <button id="editButton">Edit</button>
-      <button id="backButton" onclick="window.location.href = 'index.html'">
+      
+      <button id="editButton" class="btn">Edit</button>
+      <button id="backButton" onclick="window.location.href = 'index.html'" class="btn">
         Back to Form
       </button>
-      <button id="shareButton">Share Your Resume</button>
-      <button id="download-pdf">Download Resume</button>
+      <button id="shareButton" class="btn">Share Your Resume</button>
+      <button id="download-pdf" class="btn">Download Resume</button>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <script type="module" src="script.js"></script>
 

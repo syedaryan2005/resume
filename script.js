@@ -52,25 +52,74 @@ form.addEventListener("submit", async (event) => {
     const experianceText = document.getElementById("experianceText").value;
     const photoInput = document.getElementById("photo");
     const photofile = photoInput.files ? photoInput.files[0] : null;
-    let photoBase64 = "";
-    if (photofile) {
-        photoBase64 = await fileToBase64(photofile);
-        localStorage.setItem("resumePhoto", photoBase64);
+    
+    try {
+        // Save form data to localStorage
+        localStorage.setItem("resumeData", JSON.stringify({
+            name,
+            email,
+            number,
+            degree,
+            institute,
+            workText,
+            experianceText
+        }));
+        
+        // Process and store the photo
+        if (photofile) {
+            // Compress and resize the image before storing
+            const compressedPhoto = await compressImage(photofile, 800, 0.7);
+            try {
+                localStorage.setItem("resumePhoto", compressedPhoto);
+            } catch (storageError) {
+                console.error("Storage error:", storageError);
+                alert("Your photo is too large. It will be displayed now but won't be saved for later sessions.");
+                // Still set the photo for current session
+                resumePhoto.src = compressedPhoto;
+            }
+        }
+        
+        // Display the resume by switching visibility
+        displayResume();
+    } catch (error) {
+        console.error("Error saving resume data:", error);
+        alert("There was an error saving your data. Please try again with a smaller photo.");
     }
-    // Save form data to localStorage
-    localStorage.setItem("resumeData", JSON.stringify({
-        name,
-        email,
-        number,
-        degree,
-        institute,
-        workText,
-        experianceText
-    }));
-    // Display the resume by switching visibility
-    displayResume();
 });
-// Convert file to Base64
+// Compress and resize image before storing
+function compressImage(file, maxWidth, quality = 0.7) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                
+                // Calculate new dimensions while maintaining aspect ratio
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // Get compressed image as DataURL
+                const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                resolve(dataUrl);
+            };
+            img.onerror = reject;
+        };
+        reader.onerror = reject;
+    });
+}
+// Convert file to Base64 (kept for backward compatibility)
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -81,21 +130,34 @@ function fileToBase64(file) {
 }
 // Display the resume
 function displayResume() {
-    // Get saved data from localStorage
-    const resumeData = JSON.parse(localStorage.getItem("resumeData") || "{}");
-    resumeName.textContent = resumeData.name || '';
-    resumeEmail.textContent = `Email: ${resumeData.email || ''}`;
-    resumePhone.textContent = `Phone: ${resumeData.number || ''}`;
-    resumeEducation.textContent = `${resumeData.degree || ''} from ${resumeData.institute || ''}`;
-    resumeWorkExperiance.textContent = resumeData.workText || '';
-    resumeSkills.textContent = resumeData.experianceText || '';
-    const photoBase64 = localStorage.getItem("resumePhoto");
-    if (photoBase64) {
-        resumePhoto.src = photoBase64;
+    try {
+        // Get saved data from localStorage
+        const resumeData = JSON.parse(localStorage.getItem("resumeData") || "{}");
+        resumeName.textContent = resumeData.name || '';
+        document.querySelector("#resumeEmail span").textContent = resumeData.email || '';
+        document.querySelector("#resumePhone span").textContent = resumeData.number || '';
+        resumeEducation.textContent = `${resumeData.degree || ''} from ${resumeData.institute || ''}`;
+        resumeWorkExperiance.textContent = resumeData.workText || '';
+        resumeSkills.textContent = resumeData.experianceText || '';
+        
+        // Safely retrieve photo from localStorage
+        try {
+            const photoBase64 = localStorage.getItem("resumePhoto");
+            if (photoBase64) {
+                resumePhoto.src = photoBase64;
+            }
+        } catch (photoError) {
+            console.error("Error loading photo from localStorage:", photoError);
+            // Continue without the photo
+        }
+        
+        // Hide the form and show the resume page
+        document.getElementById("container")?.classList.add("hidden");
+        resumePage.classList.remove("hidden");
+    } catch (error) {
+        console.error("Error displaying resume:", error);
+        alert("There was an error displaying your resume. Please try again.");
     }
-    // Hide the form and show the resume page
-    document.getElementById("container")?.classList.add("hidden");
-    resumePage.classList.remove("hidden");
 }
 // Edit button functionality
 editButton.addEventListener("click", () => {
@@ -148,8 +210,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (name || email || phone || degree || institue || workExperience || skills) {
         // Populate the resume preview if query params are present
         resumeName.textContent = name;
-        resumeEmail.textContent = `Email: ${email}`;
-        resumePhone.textContent = `Phone: ${phone}`;
+        document.querySelector("#resumeEmail span").textContent = email;
+        document.querySelector("#resumePhone span").textContent = phone;
         resumeEducation.textContent = `${degree} from ${institue}`;
         resumeWorkExperiance.textContent = workExperience;
         resumeSkills.textContent = skills;
